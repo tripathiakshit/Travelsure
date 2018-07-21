@@ -3,8 +3,8 @@ import * as $ from 'jquery';
 
 // Saves options to chrome.storage.sync.
 function save_options() {
-  var color = $('#color').val();
-  var likesColor = $('#like').prop('checked');
+  let color = $('#color').val();
+  let likesColor = $('#like').prop('checked');
   chrome.storage.sync.set({
     favoriteColor: color,
     likesColor: likesColor

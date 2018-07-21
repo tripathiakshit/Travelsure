@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Chrome Extension TypeScript Starter",
-  "description": "Chrome Extension, TypeScript, Visual Studio Code",
+  "name": "Travelsure",
+  "description": "Travel, Insurance, Shopping",
   "version": "1.0",
 
   "options_ui": {
