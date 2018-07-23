@@ -13,16 +13,16 @@
 import * as models from './models';
 
 export interface ErrorModelMessageDetail {
-    messageCode?: string;
+    MessageCode?: string;
 
-    messageType?: string;
+    MessageType?: string;
 
-    userMessage?: string;
+    UserMessage?: string;
 
-    messageLevel?: string;
+    MessageLevel?: string;
 
-    messageSeverity?: string;
+    MessageSeverity?: string;
 
-    messageList?: models.ErrorModelMessageDetailMessageList;
+    MessageList?: models.ErrorModelMessageDetailMessageList;
 
 }

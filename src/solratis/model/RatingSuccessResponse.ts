@@ -13,10 +13,10 @@
 import * as models from './models';
 
 export interface RatingSuccessResponse {
-    messageDetail?: any;
+    MessageDetail?: any;
 
-    responseStatus?: string;
+    ResponseStatus?: string;
 
-    policy?: any;
+    Policy?: any;
 
 }

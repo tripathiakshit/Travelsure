@@ -44,43 +44,43 @@ export class DefaultApi {
 
     /**
      * Gets Rate for Leisure Travel
-     * @param token Authentication Token
-     * @param contentType Content Type
-     * @param eventName EventName
-     * @param ratingRequest For rating request
+     * @param Token Authentication Token
+     * @param ContentType Content Type
+     * @param EventName EventName
+     * @param RatingRequest For rating request
      */
-    public getRates(token: string, contentType: string, eventName: string, ratingRequest: models.RatingRequest): JQueryPromise<{ response: JQueryXHR; body: models.RatingSuccessResponse;  }> {
-        let localVarPath = this.basePath + '/FireEventV2';
+    public getRates(Token: string, ContentType: string, EventName: string, RatingRequest: models.RatingRequest): JQueryPromise<{ response: JQueryXHR; body: models.RatingSuccessResponse;  }> {
+        let localVarPath = this.basePath + '/FireEventV2?';
 
         let queryParameters: any = {};
         let headerParams: any = {};
-        // verify required parameter 'token' is not null or undefined
-        if (token === null || token === undefined) {
-            throw new Error('Required parameter token was null or undefined when calling getRates.');
+        // verify required parameter 'Token' is not null or undefined
+        if (Token === null || Token === undefined) {
+            throw new Error('Required parameter Token was null or undefined when calling getRates.');
         }
 
-        // verify required parameter 'contentType' is not null or undefined
-        if (contentType === null || contentType === undefined) {
-            throw new Error('Required parameter contentType was null or undefined when calling getRates.');
+        // verify required parameter 'ContentType' is not null or undefined
+        if (ContentType === null || ContentType === undefined) {
+            throw new Error('Required parameter ContentType was null or undefined when calling getRates.');
         }
 
-        // verify required parameter 'eventName' is not null or undefined
-        if (eventName === null || eventName === undefined) {
-            throw new Error('Required parameter eventName was null or undefined when calling getRates.');
+        // verify required parameter 'EventName' is not null or undefined
+        if (EventName === null || EventName === undefined) {
+            throw new Error('Required parameter EventName was null or undefined when calling getRates.');
         }
 
-        // verify required parameter 'ratingRequest' is not null or undefined
-        if (ratingRequest === null || ratingRequest === undefined) {
-            throw new Error('Required parameter ratingRequest was null or undefined when calling getRates.');
+        // verify required parameter 'RatingRequest' is not null or undefined
+        if (RatingRequest === null || RatingRequest === undefined) {
+            throw new Error('Required parameter RatingRequest was null or undefined when calling getRates.');
         }
 
 
         localVarPath = localVarPath + "?" + $.param(queryParameters);
-        headerParams['Token'] = String(token);
+        headerParams['Token'] = String(Token);
 
-        headerParams['Content-Type'] = String(contentType);
+        headerParams['Content-Type'] = String(ContentType);
 
-        headerParams['EventName'] = String(eventName);
+        headerParams['EventName'] = String(EventName);
 
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -102,7 +102,7 @@ export class DefaultApi {
             processData: false
         };
 
-        requestOptions.data = JSON.stringify(ratingRequest);
+        requestOptions.data = JSON.stringify(RatingRequest);
         if (headerParams['Content-Type']) {
             requestOptions.contentType = headerParams['Content-Type'];
         }

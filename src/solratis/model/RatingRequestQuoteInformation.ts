@@ -13,48 +13,48 @@
 import * as models from './models';
 
 export interface RatingRequestQuoteInformation {
-    productID?: string;
+    ProductID?: string;
 
-    productVerID?: string;
+    ProductVerID?: string;
 
-    productNumber?: string;
+    ProductNumber?: string;
 
-    productVerNumber?: string;
+    ProductVerNumber?: string;
 
-    producerCode?: string;
+    ProducerCode?: string;
 
-    ownerId?: string;
+    OwnerId?: string;
 
-    planName?: string;
+    PlanName?: string;
 
-    planCode?: string;
+    PlanCode?: string;
 
-    departureDate?: string;
+    DepartureDate?: string;
 
-    returnDate?: string;
+    ReturnDate?: string;
 
-    depositDate?: string;
+    DepositDate?: string;
 
-    destinationCountry?: string;
+    DestinationCountry?: string;
 
-    policyEffectiveDate?: string;
+    PolicyEffectiveDate?: string;
 
-    rentalStartDate?: string;
+    RentalStartDate?: string;
 
-    rentalEndDate?: string;
+    RentalEndDate?: string;
 
-    rentalLimit?: string;
+    RentalLimit?: string;
 
-    numberOfRentalCars?: string;
+    NumberOfRentalCars?: string;
 
-    tripCancellationCoverage?: string;
+    TripCancellationCoverage?: string;
 
-    stateCode?: string;
+    StateCode?: string;
 
-    quoteType?: string;
+    QuoteType?: string;
 
-    eventName?: string;
+    EventName?: string;
 
-    travelerList?: Array<models.RatingRequestQuoteInformationTravelerList>;
+    TravelerList?: Array<models.RatingRequestQuoteInformationTravelerList>;
 
 }
