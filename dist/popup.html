@@ -1,31 +1,26 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
 
-      button {
-        /* border: 0;
-        background-color: green;
-        color: white; */
-        padding: 1rem;
-      }
-    </style>
-    <script src="js/vendor.js"></script>
-  </head>
-  <body>
-    <ul style="min-width: 700px;">
-    <li>Current URL: <span id="url"></span></li>
-    <li>Current Time: <span id="time"></span></li>
-    </ul>
-    <button id="countUp">count up</button>
-    <button id="changeBackground">change background</button>
-    <script src="js/popup.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Travelsure</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/vendor.js"></script>
+</head>
+
+<body>
+  <h2>Welcome to Travelsafe</h2>
+  <form onsubmit="signUp()">
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter a username" min="8" max="32" required>
+    <label for="email">Email:</label>
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <label for="password">Password:</label>
+    <input type="password" name="password" placeholder="Enter a password" required>
+    <input type="password" name="password2" placeholder="Confirm Password" required>
+    <input type="submit" name="submit" value="Sign Up">
+  </form>
+  <script src="js/popup.js"></script>
+</body>
+
 </html>
-

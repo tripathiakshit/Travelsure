@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Travelsure Options</title>
   <script src="js/vendor.js"></script>
 </head>
 
 <body>
+  <h2>User Information</h2>
+  <p>
+    Current Username:
+    <span id="currentUsername"></span>
+    <br> Current Email:
+    <span id="currentEmail"></span>
+  </p>
+
   Favorite color:
   <select id="color">
-   <option value="red">red</option>
-   <option value="green">green</option>
-   <option value="blue">blue</option>
-   <option value="yellow">yellow</option>
+    <option value="red">red</option>
+    <option value="green">green</option>
+    <option value="blue">blue</option>
+    <option value="yellow">yellow</option>
   </select>
 
   <label>
-    <input type="checkbox" id="like">
-    I like colors.
+    <input type="checkbox" id="like"> I like colors.
   </label>
 
   <div id="status"></div>
@@ -24,4 +32,5 @@
 
   <script src="js/options.js"></script>
 </body>
+
 </html>
