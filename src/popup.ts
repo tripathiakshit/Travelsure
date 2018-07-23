@@ -30,8 +30,3 @@ $(function () {
     });
   });
 });
-
-function signUp(): void {
-  bg.setUsername($('#username'));
-  bg.setEmail($('#email'));
-}
