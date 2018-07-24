@@ -13,8 +13,8 @@
 import * as models from './models';
 
 export interface RatingRequest {
-    serviceRequestDetail?: models.RatingRequestServiceRequestDetail;
+    ServiceRequestDetail?: models.RatingRequestServiceRequestDetail;
 
-    quoteInformation?: models.RatingRequestQuoteInformation;
+    QuoteInformation?: models.RatingRequestQuoteInformation;
 
 }

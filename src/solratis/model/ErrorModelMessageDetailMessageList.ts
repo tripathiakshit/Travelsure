@@ -13,6 +13,6 @@
 import * as models from './models';
 
 export interface ErrorModelMessageDetailMessageList {
-    message?: Array<string>;
+    Message?: Array<string>;
 
 }

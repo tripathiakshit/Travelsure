@@ -13,21 +13,21 @@
 import * as models from './models';
 
 export interface RatingRequestServiceRequestDetail {
-    serviceRequestVersion?: string;
+    ServiceRequestVersion?: string;
 
-    serviceResponseVersion?: string;
+    ServiceResponseVersion?: string;
 
-    ownerId?: string;
+    OwnerId?: string;
 
-    responseType?: RatingRequestServiceRequestDetail.ResponseTypeEnum;
+    ResponseType?: RatingRequestServiceRequestDetail.ResponseTypeEnum;
 
-    regionCode?: string;
+    RegionCode?: string;
 
-    token?: string;
+    Token?: string;
 
-    userName?: string;
+    UserName?: string;
 
-    languageCode?: string;
+    LanguageCode?: string;
 
 }
 export namespace RatingRequestServiceRequestDetail {

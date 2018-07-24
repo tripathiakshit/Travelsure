@@ -13,8 +13,8 @@
 import * as models from './models';
 
 export interface RatingRequestQuoteInformationTravelerList {
-    travelerDOB?: string;
+    TravelerDOB?: string;
 
-    travelCost?: string;
+    TravelCost?: string;
 
 }

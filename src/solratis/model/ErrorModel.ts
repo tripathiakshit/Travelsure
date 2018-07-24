@@ -13,8 +13,8 @@
 import * as models from './models';
 
 export interface ErrorModel {
-    requestStatus: string;
+    RequestStatus: string;
 
-    messageDetail: models.ErrorModelMessageDetail;
+    MessageDetail: models.ErrorModelMessageDetail;
 
 }
