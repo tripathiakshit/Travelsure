@@ -75,7 +75,7 @@ export class DefaultApi {
         }
 
 
-        localVarPath = localVarPath + "?" + $.param(queryParameters);
+        //localVarPath = localVarPath + "?" + $.param(queryParameters);
         headerParams['Token'] = String(Token);
 
         headerParams['Content-Type'] = String(ContentType);
