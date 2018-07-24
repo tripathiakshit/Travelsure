@@ -30,3 +30,7 @@ $(function () {
     });
   });
 });
+
+function submitUserDetail() {
+  let form = $('#userDetail');
+}
