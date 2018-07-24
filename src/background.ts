@@ -56,10 +56,26 @@ function getRates() {
 
 chrome.tabs.onUpdated.addListener(function
     (tabId, changeInfo, tab) {
+        const regex = /https:\/\/www\.google\.com\/flights#flt=[A-Z]{3}\.([A-Z]{3}).(\d{4}-\d{2}-\d{2})[^\*]+\*[A-Z]{3}\.[A-Z]{3}.(\d{4}-\d{2}-\d{2}).*\*\.[A-Z]{3}\.(\d+)/gm;
       // read changeInfo data and do something with it (like read the url)
-      if (changeInfo.url) {
-          console.log(airports.findWhere({ iata: 'YYZ' }).get('country'));
-          console.log(changeInfo.url);
+      if (changeInfo.url && changeInfo.url.match(regex)) {
+          let m;
+          while ((m = regex.exec(changeInfo.url)) !== null) {
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+
+            m.forEach((match, groupIndex) => {
+                
+                if(groupIndex == 1) {
+                    console.log(airports.findWhere({ iata: match }).get('country'));
+                }
+                //console.log(`Found match, group ${groupIndex}: ${match}`);
+            });
+          }
+          
+        //  console.log(airports.findWhere({ iata: 'YYZ' }).get('country'));
+         // console.log(changeInfo.url);
       }
     }
   );
