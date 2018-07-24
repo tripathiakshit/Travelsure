@@ -1,6 +1,7 @@
 import { DefaultApi } from './solratis/api/DefaultApi';
 import { Configuration } from './solratis/configuration';
 import * as models from './solratis/model/models';
+import * as airports from 'airport-codes';
 
 function getRates() {
     let configuration = new Configuration();
@@ -52,4 +53,13 @@ function getRates() {
     console.log(api.getRates(configuration.accessToken, "application/json", "InvokeRatingV2", req));
 }
 
-getRates();
+
+chrome.tabs.onUpdated.addListener(function
+    (tabId, changeInfo, tab) {
+    // read changeInfo data and do something with it (like read the url)
+    if (changeInfo.url) {
+        console.log(airports.findWhere({ iata: 'YYZ' }).get('country'));
+        console.log(changeInfo.url);
+    }
+}
+);
