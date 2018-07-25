@@ -14,15 +14,14 @@ function getDate(date: string) : string {
 }
 
 function sendMessage(policies : any[]) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {
-            action: "policies_updated", 
-            payload: policies
-          },
-          function(response) {
-              console.log("Response: " + response);
-          });
-      });
+    chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+    chrome.browserAction.setBadgeText({text: 'NEW'});
+    // chrome.storage.local.set({'policies': policies}, function() {
+    //     console.log('Value is set to ' + policies);
+    // });
+    // chrome.storage.local.get(['policies'], function(result) {
+    //     console.log('Value currently is ' + result.key);
+    // });
 }
 
 chrome.tabs.onUpdated.addListener(function
