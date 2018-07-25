@@ -8,11 +8,11 @@ function save_options() {
   chrome.storage.sync.set({
     favoriteColor: color,
     likesColor: likesColor
-  }, function() {
+  }, function () {
     // Update status to let user know options were saved.
     var status = $('#status');
     status.text('Options saved.');
-    setTimeout(function() {
+    setTimeout(function () {
       status.text('');
     }, 750);
   });
@@ -22,15 +22,13 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
-  chrome.storage.sync.get({
-    favoriteColor: 'red',
-    likesColor: true
-  }, function(items: {favoriteColor, likesColor}) {
+  chrome.storage.sync.get(['favoriteColor', 'likesColor', 'userDob', 'userState'], function (items) {
     $('#color').val(items.favoriteColor);
     $('#like').prop('checked', items.likesColor);
+    $('#currentUserDob').val(items.userDob);
+    $('#currentUserState').val(items.userState);
   });
 }
 
 $('#save').click(save_options);
 $(restore_options); // document.addEventListener('DOMContentLoaded', restore_options);
-
