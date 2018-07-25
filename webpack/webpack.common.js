@@ -6,7 +6,8 @@ module.exports = {
         popup: path.join(__dirname, '../src/popup.ts'),
         options: path.join(__dirname, '../src/options.ts'),
         background: path.join(__dirname, '../src/background.ts'),
-        content_script: path.join(__dirname, '../src/content_script.ts')
+        content_script: path.join(__dirname, '../src/content_script.ts'),
+        insurance_policy: path.join(__dirname, '../src/insurance_policy.ts')
     },
     output: {
         path: path.join(__dirname, '../dist/js'),
@@ -19,13 +20,11 @@ module.exports = {
         }
     },
     module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
-        ]
+        rules: [{
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/
+        }]
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
