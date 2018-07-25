@@ -4,35 +4,8 @@ import * as models from './solratis/model/models';
 import * as airports from 'airport-codes';
 import { ApiHelper } from './solratis/api_helper';
 
-function getRates(fromDate: string, toDate: string, country: string, price: string): JQueryPromise<{ response: JQueryXHR; body: models.RatingSuccessResponse;  }> {
-    
-    let api = ApiHelper.getApi();
-
-    let quoteInfo: models.RatingRequestQuoteInformation = {
-        DestinationCountry: country,
-        ProductID: "619",
-        ProductNumber: "ILT",
-        ProductVerNumber: "1.0",
-        ProducerCode: "86201",
-        OwnerId: "15",
-        PlanName: "Air Ticket Protector",
-        PlanCode: "1",
-        DepartureDate: fromDate,
-        ReturnDate: toDate,
-        DepositDate: fromDate,
-        ProductVerID: "706",
-        TripCancellationCoverage: "With Trip Cancellation",
-        StateCode: "GA",
-        QuoteType: "New Business",
-        EventName: "InvokeRatingV2",
-        TravelerList: ApiHelper.getTravelerList(price)
-    };
-
-    let req: models.RatingRequest = {
-        ServiceRequestDetail: ApiHelper.getRequestServiceDetail(),
-        QuoteInformation: quoteInfo
-    }
-    return api.getRates(ApiHelper.getToken(), "application/json", "InvokeRatingV2", req);
+function getRates(fromDate: string, toDate: string, country: string, price: string): any {
+    return ApiHelper.getRatingRequest(fromDate, toDate, "GA", country, price);
 }
 
 function getDate(date: string) : string {
@@ -40,6 +13,17 @@ function getDate(date: string) : string {
     return dateSplit[1] + "/" + dateSplit[2] + "/" + dateSplit[0];
 }
 
+function sendMessage(policies : any[]) {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            action: "policies_updated", 
+            payload: policies
+          },
+          function(response) {
+              console.log("Response: " + response);
+          });
+      });
+}
 
 chrome.tabs.onUpdated.addListener(function
     (tabId, changeInfo, tab) {
@@ -69,8 +53,10 @@ chrome.tabs.onUpdated.addListener(function
                 }
             });
           }
-          getRates(fromDate, toDate, country, price).then((response, body) => {
-              console.log(body);
+          ApiHelper.getRatingRequest(fromDate, toDate, "GA", country, price)
+          .then((result1, result2, result3) => {
+              let policies: any[] = [result1, result2, result3];
+              sendMessage(policies);
           });
       }
     }

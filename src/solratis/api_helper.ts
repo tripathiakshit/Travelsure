@@ -1,6 +1,8 @@
 import * as models from './model/models'
 import { Configuration } from './configuration';
 import { DefaultApi } from './api/DefaultApi';
+import { PlanName } from './plan_names';
+import * as $ from 'jquery';
 
 export class ApiHelper {
 
@@ -46,29 +48,108 @@ export class ApiHelper {
         return this.accessToken;
     }
 
-    public buildQuoteInfo(country: string, 
-        fromDate: string, toDate: string, 
-        travelerList: Array<models.RatingRequestQuoteInformationTravelerList>) {
-            let quoteInfo: models.RatingRequestQuoteInformation = {
-                DestinationCountry: country,
-                ProductID: "619",
-                ProductNumber: "ILT",
-                ProductVerNumber: "1.0",
-                ProducerCode: "86201",
-                OwnerId: "15",
-                PlanName: "Air Ticket Protector",
-                PlanCode: "1",
-                DepartureDate: fromDate,
-                ReturnDate: toDate,
-                DepositDate: fromDate,
-                ProductVerID: "706",
-                TripCancellationCoverage: "With Trip Cancellation",
-                StateCode: "GA",
-                QuoteType: "New Business",
-                EventName: "InvokeRatingV2",
-                TravelerList: travelerList
-            };
-            
+    public static getRatingRequest(fromDate: string, toDate: string, stateCode: string,
+        country: string, price: string) : JQuery.Promise3<{
+            response: JQueryXHR;
+            body: models.RatingSuccessResponse;
+        }, any, never, {
+            response: JQueryXHR;
+            body: models.RatingSuccessResponse;
+        }, any, never, {
+            response: JQueryXHR;
+            body: models.RatingSuccessResponse;
+        }, any, never> {
+
+        let reqProc: models.RatingRequest = {
+            ServiceRequestDetail: ApiHelper.getRequestServiceDetail(),
+            QuoteInformation: this.buildQuoteInfo(country, fromDate, toDate, stateCode, PlanName.AIR_TICKET_PROTECTOR, this.getTravelerList(price))
+        }
+
+        let reqPrem: models.RatingRequest = {
+            ServiceRequestDetail: ApiHelper.getRequestServiceDetail(),
+            QuoteInformation: this.buildQuoteInfo(country, fromDate, toDate, stateCode, PlanName.PREMIER, this.getTravelerList(price))
+        }
+
+        let reqClass: models.RatingRequest = {
+            ServiceRequestDetail: ApiHelper.getRequestServiceDetail(),
+            QuoteInformation: this.buildQuoteInfo(country, fromDate, toDate, stateCode, PlanName.CLASSIC_PLUS, this.getTravelerList(price))
+        }
+
+        var promises = $.when(this.getApi().getRates(ApiHelper.getToken(), "application/json", "InvokeRatingV2", reqProc),
+                this.getApi().getRates(ApiHelper.getToken(), "application/json", "InvokeRatingV2", reqPrem),
+                this.getApi().getRates(ApiHelper.getToken(), "application/json", "InvokeRatingV2", reqClass),
+            )
+        return promises;
     }
 
+    public static buildQuoteInfo(country: string,
+        fromDate: string, toDate: string, stateCode: string, planName: PlanName,
+        travelerList: Array<models.RatingRequestQuoteInformationTravelerList>) 
+        : models.RatingRequestQuoteInformation {
+            var quoteInfo: models.RatingRequestQuoteInformation;
+
+            switch(planName) {
+                case PlanName.AIR_TICKET_PROTECTOR:
+                    quoteInfo = this.getQuoteInfoForProtector();
+                    break;
+                case PlanName.CLASSIC_PLUS:
+                    quoteInfo = this.getQuoteInfoForClassic();
+                    break;
+                case PlanName.PREMIER:
+                    quoteInfo = this.getQuoteInfoForPremier();
+                    break;
+                default:
+                    quoteInfo = this.getQuoteInfoForProtector();
+            }
+
+            quoteInfo.DestinationCountry = country;
+            quoteInfo.DepartureDate = fromDate;
+            quoteInfo.ReturnDate = toDate;
+            quoteInfo.DepositDate = fromDate;
+            quoteInfo.StateCode = stateCode;
+            quoteInfo.TravelerList = travelerList;
+            return quoteInfo;
+    }
+
+    public static getQuoteInfoForProtector() : models.RatingRequestQuoteInformation {
+        let quoteInfo: models.RatingRequestQuoteInformation = this.getStaticQuoteInfo();
+        quoteInfo.ProducerCode = "86201";
+        quoteInfo.PlanName = "Air Ticket Protector";
+        quoteInfo.PlanCode = "1"
+        quoteInfo.TripCancellationCoverage = "With Trip Cancellation";
+        return quoteInfo;
+    }
+
+    public static getQuoteInfoForClassic() : models.RatingRequestQuoteInformation {
+        let quoteInfo: models.RatingRequestQuoteInformation = this.getStaticQuoteInfo();
+        quoteInfo.ProducerCode = "86201";
+        quoteInfo.PlanName = "Classic Plus";
+        quoteInfo.PlanCode = "2"
+        quoteInfo.TripCancellationCoverage = "With Trip Cancellation";
+        return quoteInfo;
+    }
+
+    public static getQuoteInfoForPremier() : models.RatingRequestQuoteInformation {
+        let quoteInfo: models.RatingRequestQuoteInformation = this.getStaticQuoteInfo();
+        quoteInfo.ProducerCode = "86201";
+        quoteInfo.PlanName = "Premier";
+        quoteInfo.PlanCode = "2"
+        quoteInfo.TripCancellationCoverage = "With Trip Cancellation";
+        return quoteInfo;
+    }
+
+
+    private static getStaticQuoteInfo() : models.RatingRequestQuoteInformation {
+        let quoteInfo: models.RatingRequestQuoteInformation = {
+            ProductID: "619",
+            ProductNumber: "ILT",
+            ProductVerNumber: "1.0",
+            OwnerId: "15",
+            ProductVerID: "706",
+            StateCode: "GA",
+            QuoteType: "New Business",
+            EventName: "InvokeRatingV2",
+        };
+        return quoteInfo;
+    }
 }
