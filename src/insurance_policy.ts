@@ -122,6 +122,7 @@ $('#userFormBackButton').click((event) => {
         "fast",
         () => {
             $('#package-select-page').show("slow");
+            (<HTMLFormElement>$("#userForm")[0]).reset();
         });
 });
 
