@@ -13,15 +13,21 @@ function getDate(date: string) : string {
     return dateSplit[1] + "/" + dateSplit[2] + "/" + dateSplit[0];
 }
 
-function sendMessage(policies : any[]) {
+function sendMessage(policies: any, country: string) {
     chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
     chrome.browserAction.setBadgeText({text: 'NEW'});
-    // chrome.storage.local.set({'policies': policies}, function() {
-    //     console.log('Value is set to ' + policies);
-    // });
-    // chrome.storage.local.get(['policies'], function(result) {
-    //     console.log('Value currently is ' + result.key);
-    // });
+    console.log(policies);
+    chrome.storage.local.set({
+        'protector': policies.protector,
+        'premier' : policies.premier,
+        'classic' : policies.classic,
+        'country' : country
+    }, function() {
+        console.log('Value is stored!');
+    });
+
+    chrome.storage.local.get(['protector', 'premier', 'classic'], function(result) {
+    });
 }
 
 chrome.tabs.onUpdated.addListener(function
@@ -54,8 +60,12 @@ chrome.tabs.onUpdated.addListener(function
           }
           ApiHelper.getRatingRequest(fromDate, toDate, "GA", country, price)
           .then((result1, result2, result3) => {
-              let policies: any[] = [result1, result2, result3];
-              sendMessage(policies);
+              let policies: any = {
+                  'protector' : result1[1], 
+                  'premier' : result2[1],
+                  'classic' : result3[1]
+                }
+                sendMessage(policies, country);
           });
       }
     }
