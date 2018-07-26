@@ -30,6 +30,7 @@ chrome.storage.local.get(['userDob', 'userState'], function (result) {
         'userDob': userDob,
         'userState': userState
       }, function () {
+        window.close();
         console.log("Saved!");
       });
     });
