@@ -4,10 +4,6 @@ import * as models from './solratis/model/models';
 import * as airports from 'airport-codes';
 import { ApiHelper } from './solratis/api_helper';
 
-function getRates(fromDate: string, toDate: string, country: string, price: string): any {
-    return ApiHelper.getRatingRequest(fromDate, toDate, "GA", country, price);
-}
-
 function getDate(date: string) : string {
     let dateSplit = date.split("-");
     return dateSplit[1] + "/" + dateSplit[2] + "/" + dateSplit[0];
@@ -58,15 +54,18 @@ chrome.tabs.onUpdated.addListener(function
                 }
             });
           }
-          ApiHelper.getRatingRequest(fromDate, toDate, "GA", country, price)
-          .then((result1, result2, result3) => {
-              let policies: any = {
-                  'protector' : result1[1], 
-                  'premier' : result2[1],
-                  'classic' : result3[1]
-                }
-                sendMessage(policies, country);
+          chrome.storage.local.get(['userDob', 'userState'], function(result) {
+            ApiHelper.getRatingRequest(fromDate, toDate, result.userState, country, price, result.userDob)
+            .then((result1, result2, result3) => {
+                let policies: any = {
+                    'protector' : result1[1], 
+                    'premier' : result2[1],
+                    'classic' : result3[1]
+                  }
+                  sendMessage(policies, country);
+            });
           });
+          
       }
     }
 );
