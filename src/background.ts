@@ -26,6 +26,18 @@ function sendMessage(policies: any, country: string) {
     });
 }
 
+chrome.runtime.onMessage.addListener(function(message: any) {
+    if(message.createCustomer) {
+        chrome.storage.local.get(['country', 'fromDate', 'toDate', 'price'], function(result) {
+            ApiHelper.createCustomerRequest(result.fromDate, 
+                result.toDate, result.country, message.plan, message.travelInfo).then((resp, body) => {
+                    
+                });
+        });
+    }
+    return true;
+});
+
 chrome.tabs.onUpdated.addListener(function
     (tabId, changeInfo, tab) {
         const regex = /https:\/\/www\.google\.com\/flights#flt=[A-Z]{3}\.([A-Z]{3}).(\d{4}-\d{2}-\d{2})[^\*]+\*[A-Z]{3}\.[A-Z]{3}.(\d{4}-\d{2}-\d{2}).*\*\.[A-Z]{3}\.(\d+)/gm;
