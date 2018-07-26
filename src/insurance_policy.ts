@@ -7,8 +7,19 @@ var UsaStates = require('usa-states').UsaStates;
 
 let selectedPlan = null;
 
+chrome.storage.local.get(['protector','premier','classic', 'country'], function(result) {
+    $('#travel-country').text(result.country);
+    $('#air-ticket-protector-rate').text('$' + getGrossPremium(result.protector));
+    $('#premier-rate').text('$'+ getGrossPremium(result.premier));
+    $('#classic-rate').text('$'+ getGrossPremium(result.classic));
+});
 
-
+function getTraveler(plan: any) : any {
+    return plan.PremiumInformation.TravelerList[0];
+} 
+function getGrossPremium(plan: any) : any {
+    return plan.PremiumInformation.TotalGrossPremium;
+}
 
 $('#atp-button').click((event) => {
     selectedPlan = "atp";
