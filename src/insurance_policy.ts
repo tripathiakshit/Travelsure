@@ -14,9 +14,6 @@ chrome.storage.local.get(['protector','premier','classic', 'country'], function(
     $('#classic-rate').text('$'+ getGrossPremium(result.classic));
 });
 
-function getTraveler(plan: any) : any {
-    return plan.PremiumInformation.TravelerList[0];
-} 
 function getGrossPremium(plan: any) : any {
     return plan.PremiumInformation.TotalGrossPremium;
 }
@@ -69,37 +66,29 @@ $("#userForm").submit((event) => {
 
     chrome.storage.local.get(['userDob', 'userState'], (items) => {
         travelerDob = items.userDob;
+        let index = usStates.arrayOf('a').indexOf(items.userState);
+        // TODO: Add state and statecode and send object to localstorage
+        let travelerInfo: TravelerInfo = {
+            TravelerDob: travelerDob,
+            FirstName: fname,
+            LastName: lname,
+            AddressLine1: address,
+            City: city,
+            State: usStates.arrayOf('names')[index],
+            StateCode: items.userState,
+            Country: 'US',
+            ZipCode: zipcode,
+            Phone: phone,
+            Email: email
+        };
+        console.log(travelerInfo);
+        $("#user-info-page").hide(
+            "fast",
+            () => {
+                $("#payment-info-page").show("fast");
+            }
+        );
     });
-
-    // TODO: Add state and statecode and send object to localstorage
-    let travelerInfo: TravelerInfo = {
-        TravelerDob: travelerDob,
-        FirstName: fname,
-        LastName: lname,
-        AddressLine1: address,
-        City: city,
-        // State: usStates.states.get(travelerState),
-        // StateCode: travelerState,
-        // Country: state,
-        ZipCode: zipcode,
-        Phone: phone,
-        Email: email
-    };
-
-    // chrome.storage.local.set({
-    //     'travelerInfo': travelerInfo
-    // }, function () {
-    //     console.log("Saved travel info!");
-    // });
-
-    console.log(travelerInfo);
-
-    $("#user-info-page").hide(
-        "fast",
-        () => {
-            $("#payment-info-page").show("fast");
-        }
-    );
 });
 
 $('#paymentForm').submit((event) => {
