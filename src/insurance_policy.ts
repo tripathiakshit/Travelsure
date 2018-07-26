@@ -6,7 +6,6 @@ import { PaymentInfo } from './solratis/model/PaymentInfo';
 var UsaStates = require('usa-states').UsaStates;
 
 let selectedPlan = null;
-
 chrome.browserAction.setBadgeText({text:''});
 chrome.storage.local.get(['protector','premier','classic', 'country'], function(result) {
     if(!result.protector) {
@@ -29,7 +28,7 @@ function getGrossPremium(plan: any) : any {
 }
 
 $('#atp-button').click((event) => {
-    selectedPlan = "atp";
+    selectedPlan = "protector";
     console.log(selectedPlan);
     $('#package-select-page').hide(
         "fast",
@@ -91,13 +90,17 @@ $("#userForm").submit((event) => {
             Phone: phone,
             Email: email
         };
-        console.log(travelerInfo);
-        $("#user-info-page").hide(
-            "fast",
-            () => {
-                $("#payment-info-page").show("fast");
-            }
-        );
+        chrome.runtime.sendMessage({
+            'createCustomer' : 'action',
+            'travelInfo' : travelerInfo,
+            'plan' : selectedPlan
+        }, function(result) {
+            $("#user-info-page").hide(
+                "fast",
+                () => {
+                    $("#payment-info-page").show("fast");
+                });
+        });
     });
 });
 

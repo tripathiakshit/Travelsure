@@ -12,7 +12,6 @@ function getDate(date: string) : string {
 function sendMessage(policies: any, country: string) {
     chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
     chrome.browserAction.setBadgeText({text: 'NEW'});
-    console.log(policies);
     chrome.storage.local.set({
         'protector': policies.protector,
         'premier' : policies.premier,
@@ -21,21 +20,18 @@ function sendMessage(policies: any, country: string) {
     }, function() {
         console.log('Value is stored!');
     });
-
-    chrome.storage.local.get(['protector', 'premier', 'classic'], function(result) {
-    });
 }
 
-chrome.runtime.onMessage.addListener(function(message: any) {
+chrome.runtime.onMessage.addListener(function(message: any,  sender: any, sendResponse: any) {
     if(message.createCustomer) {
-        chrome.storage.local.get(['country', 'fromDate', 'toDate', 'price'], function(result) {
+        chrome.storage.local.get(['country', 'fromDate', 'toDate', 'price', message.plan], function(result) {
             ApiHelper.createCustomerRequest(result.fromDate, 
-                result.toDate, result.country, message.plan, message.travelInfo).then((resp, body) => {
-                    
+                result.toDate, result.country, result[message.plan], message.travelInfo).then((resp, body) => {
+                    console.log(body);
+                    sendResponse(true);
                 });
         });
     }
-    return true;
 });
 
 chrome.tabs.onUpdated.addListener(function
