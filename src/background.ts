@@ -27,8 +27,12 @@ chrome.runtime.onMessage.addListener(function(message: any,  sender: any, sendRe
         chrome.storage.local.get(['country', 'fromDate', 'toDate', 'price', message.plan], function(result) {
             ApiHelper.createCustomerRequest(result.fromDate, 
                 result.toDate, result.country, result[message.plan], message.travelInfo).then((resp, body) => {
-                    console.log(body);
-                    sendResponse(true);
+                    chrome.storage.local.set({
+                        'customer': body
+                    }, function() {
+                        sendResponse(true);
+                    });
+                    
                 });
         });
     }
