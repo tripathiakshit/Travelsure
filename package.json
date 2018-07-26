@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "airport-codes": "^1.0.2",
+    "credit-card-type": "^7.0.0",
     "jquery": "~3.3.1",
     "moment": "~2.22.0",
     "usa-states": "^0.0.5"
