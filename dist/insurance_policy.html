@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <section id="page1" style="display:block">
+    <section id="package-select-page" style="display:block">
         <h1>Insurance Rates</h1>
         <p>Your travel to
             <span id="travel-country">$country</span>
@@ -53,21 +53,35 @@
             </tbody>
         </table>
     </section>
-    <section id="page2" style="display: none">
+    <section id="user-info-page" style="display: none">
         <h1>Enter Your Info</h1>
         <form id="userForm">
-            <input type="text" id="fname" placeholder="First name" required>
-            <input type="text" id="lname" placeholder="last name" required>
-            <input type="text" id="address" placeholder="Address" required>
+            <input type="text" id="fname" autocomplete="given-name" placeholder="First name" required>
+            <input type="text" id="lname" autocomplete="family-name" placeholder="last name" required>
+            <input type="text" id="address" autocomplete="street-address" placeholder="Address" required>
             <input type="text" id="city" placeholder="City" required>
             <input type="text" id="zipcode" placeholder="Zip code" required>
-            <input type="tel" id="phone" placeholder="Phone" required>
-            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" autocomplete="mobile" placeholder="Phone" required>
+            <input type="email" id="email" autocomplete="email" placeholder="Email" required>
             <input type="submit" value="Submit" id="userFormSubmitButton">
             <input type="button" value="Back" id="userFormBackButton">
         </form>
     </section>
-    <section id="page3" style="display:none">
+    <section id="payment-info-page" style="display: none">
+        <h1>Enter Payment Info</h1>
+        <form id="paymentForm">
+            <input placeholder="Card number" maxlength="19" x-autocompletetype="cc-number" autocompletetype="cc-number" autocorrect="off"
+                spellcheck="off" autocapitalize="off" type="tel">
+            <input type="text" placeholder="Name on card">
+            <input placeholder="MM / YY" maxlength="7" x-autocompletetype="cc-exp" autocompletetype="cc-exp" autocorrect="off" spellcheck="off"
+                autocapitalize="off" type="tel">
+            <input type="number" name="expiry-month" autocomplete="cc-exp-month" hidden>
+            <input type="number" name="expiry-year" autocomplete="cc-exp-year" hidden>
+            <input placeholder="CVC" maxlength="3" x-autocompletetype="cc-csc" autocompletetype="cc-csc" autocorrect="off" spellcheck="off"
+                autocapitalize="off" type="tel">
+        </form>
+    </section>
+    <section id="plan-details-page" style="display:none">
         <h1>Plan Details</h1>
         <hr>
         <textarea name="planDetails" id="plan-details-textarea" rows="10" readonly>
@@ -97,7 +111,7 @@
             <button id="plan-details-back-button">Back</button>
         </div>
     </section>
-    <section id="page4" style="display:none">
+    <section id="policy-issue-page" style="display:none">
         <h1>Policy issued!</h1>
         <span id="policy-issue-loader"></span>
         <button class="download" id="insurance-policy-download-button">Download Policy</button>
