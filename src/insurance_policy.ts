@@ -7,12 +7,22 @@ var UsaStates = require('usa-states').UsaStates;
 
 let selectedPlan = null;
 
+chrome.browserAction.setBadgeText({text:''});
 chrome.storage.local.get(['protector','premier','classic', 'country'], function(result) {
+    if(!result.protector) {
+        $("#package-select-page").hide(
+            "fast",
+            () => {
+                $("blank-page").show("slow");
+            });
+        return;
+    }
     $('#travel-country').text(result.country);
     $('#air-ticket-protector-rate').text('$' + getGrossPremium(result.protector));
     $('#premier-rate').text('$'+ getGrossPremium(result.premier));
     $('#classic-rate').text('$'+ getGrossPremium(result.classic));
 });
+
 
 function getGrossPremium(plan: any) : any {
     return plan.PremiumInformation.TotalGrossPremium;
@@ -138,7 +148,5 @@ $('#paymentFormBackButton').click((event) => {
 
 /* TODO:
     - Add a blur listener to CC Expiry to format and extract date
-    - Fetch DOB and State code from localStorage
     - Use ccType class to validate credit card number and get credit card type
-    - use statecode and UsaStates to get state, statecode and country
 */
