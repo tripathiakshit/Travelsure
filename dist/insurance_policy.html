@@ -56,13 +56,13 @@
     <section id="user-info-page" style="display: none">
         <h1>Enter Your Info</h1>
         <form id="userForm">
-            <input type="text" id="fname" autocomplete="given-name" placeholder="First name" required>
-            <input type="text" id="lname" autocomplete="family-name" placeholder="last name" required>
-            <input type="text" id="address" autocomplete="address-level1" placeholder="Address" required>
-            <input type="text" id="city" placeholder="City" required>
-            <input type="text" id="zipcode" placeholder="Zip code" required>
-            <input type="tel" id="phone" autocomplete="mobile" placeholder="Phone" required>
-            <input type="email" id="email" autocomplete="email" placeholder="Email" required>
+            <input type="text" id="fname" autocomplete="given-name" x-autocompletetype="given-name" placeholder="First name" required>
+            <input type="text" id="lname" autocomplete="family-name" x-autocompletetype="surname" placeholder="last name" required>
+            <input type="text" id="address" autocomplete="address-line1" x-autocompletetype="address-line1" placeholder="Address" required>
+            <input type="text" id="city" autocomplete="city" x-autocompletetype="city" placeholder="City" required>
+            <input type="text" id="zipcode" autocomplete="postal-code" x-autocompletetype="postal-code" placeholder="Zip code" required>
+            <input type="tel" id="phone" autocomplete="tel" x-autocompletetype="phone-full" placeholder="Phone" required>
+            <input type="email" id="email" autocomplete="email" x-autocompletetype="email" placeholder="Email" required>
             <input type="submit" value="Submit" id="userFormSubmitButton">
             <input type="button" value="Back" id="userFormBackButton" class="black-btn">
         </form>
@@ -70,15 +70,14 @@
     <section id="payment-info-page" style="display: none">
         <h1>Enter Payment Info</h1>
         <form id="paymentForm">
-            <input placeholder="Card number" maxlength="19" x-autocompletetype="cc-number" autocompletetype="cc-number" autocorrect="off"
-                id="cNumber" spellcheck="off" autocapitalize="off" type="tel">
-            <input type="text" placeholder="Name on card" id="cName">
-            <input placeholder="MM / YY" maxlength="7" x-autocompletetype="cc-exp" autocompletetype="cc-exp" autocorrect="off" spellcheck="off"
+            <input placeholder="Card number" pattern="\d*" maxlength="19" x-autocompletetype="cc-number" autocompletetype="cc-number"
+                autocorrect="off" id="cNumber" spellcheck="off" autocapitalize="off" type="tel">
+            <input type="text" autocomplete="cc-name" x-autocompletetype="cc-full-name" placeholder="Name on card" id="cName">
+            <input placeholder="MM / YY" maxlength="7" autocompletetype="cc-exp" x-autocompletetype="cc-exp" autocorrect="off" spellcheck="off"
                 id="cExp" autocapitalize="off" type="tel">
-            <input type="number" name="expiry-month" autocomplete="cc-exp-month" id="cMonth" hidden>
-            <input type="number" name="expiry-year" autocomplete="cc-exp-year" id="cYear" hidden>
-            <input placeholder="CVC" maxlength="3" x-autocompletetype="cc-csc" autocompletetype="cc-csc" autocorrect="off" spellcheck="off"
-                id="cvc" autocapitalize="off" type="tel">
+            <input type="number" name="expiry-month" autocomplete="cc-exp-month" x-autocompletetype="cc-exp-month" id="cMonth" hidden>
+            <input type="number" name="expiry-year" autocomplete="cc-exp-year" x-autocompletetype="cc-exp-year" id="cYear" hidden>
+            <input placeholder="CVC" maxlength="3" autocorrect="off" spellcheck="off" id="cvc" autocapitalize="off" type="tel">
             <input type="submit" value="Submit" id="paymentFormSubmitButton">
             <input type="button" value="Back" id="paymentFormBackButton" class="black-btn">
         </form>

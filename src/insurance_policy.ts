@@ -6,9 +6,9 @@ import { PaymentInfo } from './solratis/model/PaymentInfo';
 var UsaStates = require('usa-states').UsaStates;
 
 let selectedPlan = null;
-let state = "USA";
 
-$('#travel-country').val(state);
+
+
 
 $('#atp-button').click((event) => {
     selectedPlan = "atp";
@@ -101,11 +101,14 @@ $('#paymentForm').submit((event) => {
     let cYear = <number>$('#cYear').val();
     let cvc = <number>$('#cvc').val();
 
-    let cardType = ccType(cNumber.toString());
+    let cardType = ccType(cNumber.toString())[0].type;
+
+
 
     let paymentInfo: PaymentInfo = {
         CardNumber: cNumber,
         CardName: cName,
+        CardType: cardType,
         ExpiryMonth: cMonth,
         ExpiryYear: cYear,
         Cvc: cvc
@@ -119,7 +122,16 @@ $('#userFormBackButton').click((event) => {
         "fast",
         () => {
             $('#package-select-page').show("slow");
-            // Load classic plan trailer
+        });
+});
+
+$('#paymentFormBackButton').click((event) => {
+    $('#payment-info-page').hide(
+        "fast",
+        () => {
+            $('#cExp').val("");
+            $('#cvc').val("");
+            $('#user-info-page').show("slow");
         });
 });
 

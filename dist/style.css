@@ -71,7 +71,7 @@ table tr td button {
 }
 
 .black-btn {
-    background: -webkit-linear-gradient(0deg, #141414, #292929);
+    background: -webkit-linear-gradient(90deg, #141414, #383838);
     color: white;
     border: solid 1px #141414;
     cursor: pointer;
