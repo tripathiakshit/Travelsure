@@ -75,7 +75,8 @@ export class ApiHelper {
             Country: travelerInfo.Country,
             Zipcode: travelerInfo.ZipCode,
             Phone: travelerInfo.Phone,
-            Email: travelerInfo.Email
+            Email: travelerInfo.Email,
+            TravelerIndex: "1"
         }];
         return tList;
     }
@@ -93,9 +94,16 @@ export class ApiHelper {
         return this.accessToken;
     }
 
-    public static createCustomerRequest(fromDate: string, toDate: string, stateCode: string, 
-    country: string, price: string) {
-        
+    public static createCustomerRequest(fromDate: string, toDate: string,
+    country: string, plan: any, travelerInfo: TravelerInfo) : JQueryPromise<{ response: JQueryXHR; body: ccModels.SuccessResponse;  }> {
+        let traveler = plan.PremiumInformation.TravelerList[0];
+        let reqProc: ccModels.Request = {
+            ServiceRequestDetail : this.getStaticRequestInfo(),
+            CustomerInformation : 
+            this.buildCCInfo(fromDate, toDate, country, plan, 
+                this.getCCTravelerList(traveler.TravelCost, traveler.TravelerDOB, travelerInfo))
+        }
+        return this.getCCApi().createcustomer(this.getToken(), "application/json", "CreateCustomer", reqProc);
     }
 
     public static getRatingRequest(fromDate: string, toDate: string, stateCode: string,
@@ -130,6 +138,25 @@ export class ApiHelper {
                 this.getApi().getRates(ApiHelper.getToken(), "application/json", "InvokeRatingV2", reqClass),
             )
         return promises;
+    }
+
+    public static buildCCInfo(fromDate: string, toDate: string,
+        country: string, plan: any,
+        travelerList: Array<ccModels.RequestCustomerInformationTravelerList>) :
+        ccModels.RequestCustomerInformation {
+            
+            var custInfo: ccModels.RequestCustomerInformation = this.getStaticCustomerInfo();
+            let pInfo = plan.PremiumInformation;
+            custInfo.PlanName = pInfo.PlanName;
+            custInfo.PlanCode = pInfo.PlanCode;
+            custInfo.PlanType = "Single Trip";
+            custInfo.DepartureDate = fromDate;
+            custInfo.ReturnDate = toDate;
+            custInfo.DepositDate = fromDate;
+            custInfo.DestinationCountry = country;
+            custInfo.PolicyEffectiveDate = fromDate;
+            custInfo.TravelerList = travelerList;
+            return custInfo;
     }
 
     public static buildQuoteInfo(country: string,
@@ -209,10 +236,11 @@ export class ApiHelper {
             ProductID: "619",
             ProductNumber: "ILT",
             ProductVerNumber: "1.0",
+            ProducerCode: "86201",
             OwnerId: "15",
             ProductVerID: "706",
             QuoteType: "New Business",
-            EventName: "InvokeRatingV2",
+            EventName: "CreateCustomer",
         }
         return custInfo;
     }

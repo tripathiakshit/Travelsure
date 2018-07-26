@@ -54,17 +54,25 @@ chrome.tabs.onUpdated.addListener(function
                 }
             });
           }
-          chrome.storage.local.get(['userDob', 'userState'], function(result) {
-            ApiHelper.getRatingRequest(fromDate, toDate, result.userState, country, price, result.userDob)
-            .then((result1, result2, result3) => {
-                let policies: any = {
-                    'protector' : result1[1], 
-                    'premier' : result2[1],
-                    'classic' : result3[1]
-                  }
-                  sendMessage(policies, country);
-            });
+          chrome.storage.local.set({
+              'country' : country,
+              'fromDate' : fromDate,
+              'toDate' : toDate,
+              'price' : price
+          }, function() {
+            chrome.storage.local.get(['userDob', 'userState'], function(result) {
+                ApiHelper.getRatingRequest(fromDate, toDate, result.userState, country, price, result.userDob)
+                .then((result1, result2, result3) => {
+                    let policies: any = {
+                        'protector' : result1[1], 
+                        'premier' : result2[1],
+                        'classic' : result3[1]
+                      }
+                      sendMessage(policies, country);
+                });
+              });
           });
+          
           
       }
     }
