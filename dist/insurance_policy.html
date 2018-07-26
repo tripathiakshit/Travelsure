@@ -25,7 +25,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <button>Select</button>
+                        <button id="atp-button">Select</button>
                     </td>
                     <td>
                         <span id="air-ticket-protector-rate"></span>
@@ -34,7 +34,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <button>Select</button>
+                        <button id="premier-button">Select</button>
                     </td>
                     <td>
                         <span id="premier-rate"></span>
@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <button>Select</button>
+                        <button id="classic-button">Select</button>
                     </td>
                     <td>
                         <span id="classic-rate"></span>
@@ -53,14 +53,50 @@
             </tbody>
         </table>
     </section>
-    <section id="page2" style="display:none">
-        <h1>Plan Details</h1>
-        <hr>
-        <textarea name="planDetails" id="plan-details-textarea" cols="30" rows="10" readonly></textarea>
-        <button id="plan-details-issue-policy-button">Issue Policy</button>
-        <button id="plan-details-back-button">Back</button>
+    <section id="page2" style="display: none">
+        <form>
+            <input type="text" id="fname" placeholder="fname">
+            <input type="text" id="lname" placeholder="lname">
+            <input type="text" id="address" placeholder="address">
+            <input type="text" id="city" placeholder="city">
+            <input type="text" id="zipcode" placeholder="zipcode">
+            <input type="tel" id="phone" placeholder="phone">
+            <input type="email" id="email" placeholder="email">
+            <input type="submit" value="Submit" id="userFormSubmitButton">
+            <input type="button" value="Back" id="userFormBackButton">
+        </form>
     </section>
     <section id="page3" style="display:none">
+        <h1>Plan Details</h1>
+        <hr>
+        <textarea name="planDetails" id="plan-details-textarea" rows="10" readonly>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit minus. Maxime, harum molestias est qui nisi amet!
+            Laboriosam eos quaerat asperiores maiores cum, tempora veniam deserunt. Repellendus, sequi dolore! Ex earum fuga
+            veritatis asperiores consectetur, suscipit, incidunt iure totam expedita distinctio impedit eum repudiandae repellat
+            molestiae laborum, ipsa rem amet quia neque est veniam praesentium! Similique repellendus eos inventore. Doloremque,
+            nihil eum. Alias fuga odit veniam labore sit consectetur dolores quisquam blanditiis aliquam vitae, ullam error
+            aperiam numquam ad. Ratione iste fuga, modi nesciunt adipisci quas praesentium voluptate corporis! Asperiores
+            non, perspiciatis excepturi deserunt necessitatibus mollitia iste facere aliquam culpa eum minus iure magnam
+            esse. Totam rerum illo temporibus ad ratione, unde magni, at sequi officiis porro quasi vero. Quo officia veritatis
+            placeat dolores eligendi ex voluptatum quidem consequuntur aliquam, cumque quis ad architecto mollitia et nesciunt
+            omnis sit labore enim sint dicta ducimus molestiae? Aperiam debitis totam aliquam. Similique eius totam ducimus,
+            tempora dolore nam et, perspiciatis temporibus velit non illum animi officiis ratione, id expedita beatae! Animi
+            voluptate totam deleniti sunt quod, repellat consequatur ex magni minus. Debitis esse libero placeat ea vel atque
+            asperiores, tempora accusamus ipsum consequatur incidunt quis eius facere fugiat, eligendi voluptatem? Iste ducimus
+            facere inventore eveniet dolores tempora sunt et cupiditate totam. Eveniet, natus exercitationem sunt voluptatem
+            dicta culpa. Voluptas animi distinctio reprehenderit incidunt qui facere saepe autem. Esse voluptate, accusantium
+            vero itaque quo quibusdam ad vitae magni ipsum, nemo est deserunt? Culpa in maxime quod perspiciatis dolor tenetur
+            sunt nostrum aliquam, exercitationem quis itaque asperiores hic odit molestiae aperiam repellendus laborum officiis
+            ab repudiandae voluptas animi repellat excepturi distinctio velit. Natus. Quasi pariatur doloremque autem. Culpa
+            totam, labore deserunt officia nulla consequuntur soluta qui dolorum nihil? Deserunt sit vero architecto numquam,
+            nisi rerum voluptates, maxime consequatur nostrum ducimus officiis reiciendis soluta?
+        </textarea>
+        <div class="buttongroup">
+            <button id="plan-details-issue-policy-button">Issue Policy</button>
+            <button id="plan-details-back-button">Back</button>
+        </div>
+    </section>
+    <section id="page4" style="display:none">
         <h1>Policy issued!</h1>
         <span id="policy-issue-loader"></span>
         <button class="download" id="insurance-policy-download-button">Download Policy</button>
