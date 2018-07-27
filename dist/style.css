@@ -63,7 +63,7 @@ table tr td button {
     border: 0;
     width: 100%;
     line-height: 2;
-    background-color: #1076f2;
+    background: linear-gradient(0deg, #0b55af, #1076f2);
     color: white;
     text-transform: uppercase;
     margin: 0;
@@ -94,11 +94,26 @@ section .buttongroup {
 }
 
 section button {
+    cursor: pointer;
     border-radius: 4px;
     border: 0;
     line-height: 2;
-    background-color: #1076f2;
+    background: linear-gradient(0deg, #0b55af, #1076f2);
     color: white;
     text-transform: uppercase;
     padding: 0.35rem 0.25rem;
+}
+
+.horizontalButtonSet {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem;
+}
+
+.horizontalButtonSet button {
+    width: 49%;
+}
+
+.plan-info-page table, td, th {
+    border: solid 1px gray;
 }

@@ -30,50 +30,47 @@ function getGrossPremium(plan: any): any {
 }
 
 function loadPlanInfo() {
-    chrome.storage.local.get([selectedPlan], function(result) {
+    chrome.storage.local.get([selectedPlan], function (result) {
         let info = result[selectedPlan].CoverageInformation;
-        let body : any = document.getElementById("table-body");
+        let body: any = document.getElementById("table-body");
         info.forEach(element => {
             let row = body.insertRow();
             row.insertCell().innerText = element.CoverageName;
             row.insertCell().innerText = element.CoverageLimit;
         });
-    })
+    });
+
+    $('#plan-info-page').show("slow");
 }
+
+$('#plan-info-next-button').click((e) => {
+    $('#plan-info-page').hide("fast", () => {
+        $('#user-info-page').show("slow");
+    });
+});
+
+$('#plan-info-back-button').click((e) => {
+    $('#plan-info-page').hide("fast", () => {
+        $('package-select-page').show("slow");
+    });
+});
 
 $('#atp-button').click((event) => {
     selectedPlan = "protector";
     console.log(selectedPlan);
-    $('#package-select-page').hide(
-        "fast",
-        () => {
-            loadPlanInfo();
-            $('#plan-info-page').show("slow");
-            //$('#user-info-page').show("slow");
-            // Load Air Travel Protection data
-        });
+    $('#package-select-page').hide("fast", () => loadPlanInfo());
 });
 
 $('#premier-button').click((event) => {
     selectedPlan = "premier";
     console.log(selectedPlan);
-    $('#package-select-page').hide(
-        "fast",
-        () => {
-            $('#user-info-page').show("slow");
-            // Load Premier Plan data
-        });
+    $('#package-select-page').hide("fast", () => loadPlanInfo());
 });
 
 $('#classic-button').click((event) => {
     selectedPlan = "classic";
     console.log(selectedPlan);
-    $('#package-select-page').hide(
-        "fast",
-        () => {
-            $('#user-info-page').show("slow");
-            // Load classic plan trailer
-        });
+    $('#package-select-page').hide("fast", () => loadPlanInfo());
 });
 
 $("#userForm").submit((event) => {
