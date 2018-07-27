@@ -6,9 +6,9 @@ import { PaymentInfo } from './solratis/model/PaymentInfo';
 var UsaStates = require('usa-states').UsaStates;
 
 let selectedPlan = null;
-chrome.browserAction.setBadgeText({text:''});
-chrome.storage.local.get(['protector','premier','classic', 'country'], function(result) {
-    if(!result.protector) {
+chrome.browserAction.setBadgeText({ text: '' });
+chrome.storage.local.get(['protector', 'premier', 'classic', 'country'], function (result) {
+    if (!result.protector) {
         $("#package-select-page").hide(
             "fast",
             () => {
@@ -18,12 +18,12 @@ chrome.storage.local.get(['protector','premier','classic', 'country'], function(
     }
     $('#travel-country').text(result.country);
     $('#air-ticket-protector-rate').text('$' + getGrossPremium(result.protector));
-    $('#premier-rate').text('$'+ getGrossPremium(result.premier));
-    $('#classic-rate').text('$'+ getGrossPremium(result.classic));
+    $('#premier-rate').text('$' + getGrossPremium(result.premier));
+    $('#classic-rate').text('$' + getGrossPremium(result.classic));
 });
 
 
-function getGrossPremium(plan: any) : any {
+function getGrossPremium(plan: any): any {
     return plan.PremiumInformation.TotalGrossPremium;
 }
 
@@ -91,10 +91,10 @@ $("#userForm").submit((event) => {
             Email: email
         };
         chrome.runtime.sendMessage({
-            'createCustomer' : 'action',
-            'travelInfo' : travelerInfo,
-            'plan' : selectedPlan
-        }, function(result) {
+            'createCustomer': 'action',
+            'travelInfo': travelerInfo,
+            'plan': selectedPlan
+        }, function (result) {
             $("#user-info-page").hide(
                 "fast",
                 () => {
@@ -115,9 +115,9 @@ $('#paymentForm').submit((event) => {
 
     let cardType = ccType(cNumber.toString())[0].type;
 
-    if(cardType == 'master-card') {
+    if (cardType == 'master-card') {
         cardType = 'MasterCard';
-    } else if(cardType = 'visa') {
+    } else if (cardType = 'visa') {
         cardType = 'Visa';
     }
 
@@ -130,8 +130,8 @@ $('#paymentForm').submit((event) => {
         Cvc: cvc
     };
     chrome.runtime.sendMessage({
-        'issuePolicy' : 'action',
-        'paymentInfo' : paymentInfo
+        'issuePolicy': 'action',
+        'paymentInfo': paymentInfo
     });
     window.close();
 });
