@@ -1,4 +1,3 @@
-import * as moment from 'moment';
 import * as $ from 'jquery';
 //@ts-ignore
 var UsaStates = require('usa-states').UsaStates;
