@@ -12,7 +12,7 @@ chrome.storage.local.get(['protector', 'premier', 'classic', 'country'], functio
         $("#package-select-page").hide(
             "fast",
             () => {
-                $("blank-page").show("slow");
+                $("#blank-page").show("fast");
             });
         return;
     }
