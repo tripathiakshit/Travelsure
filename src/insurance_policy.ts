@@ -131,6 +131,12 @@ $('#paymentForm').submit((event) => {
     };
 
     console.log(paymentInfo);
+    chrome.runtime.sendMessage({
+        'issuePolicy' : 'action',
+        'paymentInfo' : paymentInfo
+    }, function(response) {
+        window.close();
+    })
 });
 
 $('#userFormBackButton').click((event) => {

@@ -135,23 +135,26 @@ export class ApiHelper {
     public static issuePolicyRequest(paymentInfo : PaymentInfo, customerNumber: string, travelerInfo : TravelerInfo) : JQueryPromise<{ response: JQueryXHR; body: iModels.SuccessResponse;  }> {
         let policyInfo = this.getIssueInfo();
         policyInfo.CustomerNumber = customerNumber;
-        policyInfo.CardType = paymentInfo.CardType;
+        policyInfo.CardType = 'MasterCard';
         policyInfo.CardNumber = paymentInfo.CardNumber;
         policyInfo.CVV = paymentInfo.Cvc;
         policyInfo.ExpiryMonth = paymentInfo.ExpiryMonth;
         policyInfo.ExpiryYear = paymentInfo.ExpiryYear;
-        policyInfo.CardType = "Credit Card";
+        policyInfo.PaymentMethod = "Credit Card";
         policyInfo.PayerName = paymentInfo.CardName;
         policyInfo.PayerAddress1 = travelerInfo.AddressLine1;
         policyInfo.PayerCity = travelerInfo.City;
         policyInfo.PayerState = travelerInfo.StateCode;
         policyInfo.PayerZipcode = travelerInfo.ZipCode;
+        policyInfo.PayerPhone = travelerInfo.Phone;
         policyInfo.PayerCountry = travelerInfo.Country;
+        policyInfo.PayerEmail = travelerInfo.Email;
 
         let reqProc: iModels.Request = {
             ServiceRequestDetail : this.getIssueServiceRequest(),
             PolicyInformation : policyInfo
         }
+        console.log(reqProc);
         return this.getIssueApi().policyissuance(this.getToken(), "application/json", "CreateCustomer", reqProc);
     }
 
