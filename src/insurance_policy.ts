@@ -2,12 +2,14 @@ import * as $ from 'jquery';
 import { TravelerInfo } from './solratis/model/TravelerInfo';
 import * as ccType from 'credit-card-type';
 import { PaymentInfo } from './solratis/model/PaymentInfo';
+import { PlanName } from './solratis/plan_names';
 //@ts-ignore
 var UsaStates = require('usa-states').UsaStates;
 
 let selectedPlan = null;
 chrome.browserAction.setBadgeText({ text: '' });
 chrome.storage.local.get(['protector', 'premier', 'classic', 'country'], function (result) {
+    console.log(result.protector);
     if (!result.protector) {
         $("#package-select-page").hide(
             "fast",
@@ -27,13 +29,27 @@ function getGrossPremium(plan: any): any {
     return plan.PremiumInformation.TotalGrossPremium;
 }
 
+function loadPlanInfo() {
+    chrome.storage.local.get([selectedPlan], function(result) {
+        let info = result[selectedPlan].CoverageInformation;
+        let body : any = document.getElementById("table-body");
+        info.forEach(element => {
+            let row = body.insertRow();
+            row.insertCell().innerText = element.CoverageName;
+            row.insertCell().innerText = element.CoverageLimit;
+        });
+    })
+}
+
 $('#atp-button').click((event) => {
     selectedPlan = "protector";
     console.log(selectedPlan);
     $('#package-select-page').hide(
         "fast",
         () => {
-            $('#user-info-page').show("slow");
+            loadPlanInfo();
+            $('#plan-info-page').show("slow");
+            //$('#user-info-page').show("slow");
             // Load Air Travel Protection data
         });
 });
