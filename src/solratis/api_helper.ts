@@ -155,7 +155,7 @@ export class ApiHelper {
             PolicyInformation : policyInfo
         }
         console.log(reqProc);
-        return this.getIssueApi().policyissuance(this.getToken(), "application/json", "CreateCustomer", reqProc);
+        return this.getIssueApi().policyissuance(this.getToken(), "application/json", "Pay_Issue", reqProc);
     }
 
     public static getRatingRequest(fromDate: string, toDate: string, stateCode: string,
