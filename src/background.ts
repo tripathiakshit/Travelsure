@@ -28,11 +28,11 @@ chrome.runtime.onMessage.addListener(function(message: any,  sender: any, sendRe
             ApiHelper.createCustomerRequest(result.fromDate, 
                 result.toDate, result.country, result[message.plan], message.travelInfo).then((resp, body) => {
                     chrome.storage.local.set({
-                        'customer': body
+                        'customer': body,
+                        'travelerInfo' : message.travelerInfo
                     }, function() {
                         sendResponse(true);
                     });
-                    
                 });
         });
     }

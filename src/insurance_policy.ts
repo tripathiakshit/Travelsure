@@ -107,16 +107,19 @@ $("#userForm").submit((event) => {
 $('#paymentForm').submit((event) => {
     event.preventDefault();
 
-    let cNumber = <number>$('#cNumber').val();
+    let cNumber = <string>$('#cNumber').val();
     let cName = <string>$('#cName').val();
-    let cExp = <string>$('#cExp').val();
-    let cMonth = <number>$('#cMonth').val();
-    let cYear = <number>$('#cYear').val();
-    let cvc = <number>$('#cvc').val();
+    let cMonth = <string>$('#cMonth').val();
+    let cYear = <string>$('#cYear').val();
+    let cvc = <string>$('#cvc').val();
 
     let cardType = ccType(cNumber.toString())[0].type;
 
-
+    if(cardType == 'master-card') {
+        cardType = 'MasterCard';
+    } else if(cardType = 'visa') {
+        cardType = 'Visa';
+    }
 
     let paymentInfo: PaymentInfo = {
         CardNumber: cNumber,

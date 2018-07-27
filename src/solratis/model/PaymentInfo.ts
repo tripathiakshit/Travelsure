@@ -1,8 +1,8 @@
 export interface PaymentInfo {
-    CardNumber?: number;
+    CardNumber?: string;
     CardName?: string;
     CardType?: string;
-    ExpiryMonth?: number;
-    ExpiryYear?: number;
-    Cvc?: number;
+    ExpiryMonth?: string;
+    ExpiryYear?: string;
+    Cvc?: string;
 }

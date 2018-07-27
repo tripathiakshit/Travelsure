@@ -73,10 +73,8 @@
             <input placeholder="Card number" pattern="\d*" maxlength="19" x-autocompletetype="cc-number" autocompletetype="cc-number"
                 autocorrect="off" id="cNumber" spellcheck="off" autocapitalize="off" type="tel">
             <input type="text" autocomplete="cc-name" x-autocompletetype="cc-full-name" placeholder="Name on card" id="cName">
-            <input placeholder="MM / YY" maxlength="7" autocompletetype="cc-exp" x-autocompletetype="cc-exp" autocorrect="off" spellcheck="off"
-                id="cExp" autocapitalize="off" type="tel">
-            <input type="number" name="expiry-month" autocomplete="cc-exp-month" x-autocompletetype="cc-exp-month" id="cMonth" hidden>
-            <input type="number" name="expiry-year" autocomplete="cc-exp-year" x-autocompletetype="cc-exp-year" id="cYear" hidden>
+            <input type="number" placeholder="Expiry Month" name="expiry-month" autocomplete="cc-exp-month" x-autocompletetype="cc-exp-month" id="cMonth">
+            <input type="number" placeholder="Expiry Year" name="expiry-year" autocomplete="cc-exp-year" x-autocompletetype="cc-exp-year" id="cYear">
             <input placeholder="CVC" maxlength="3" autocorrect="off" spellcheck="off" id="cvc" autocapitalize="off" type="tel">
             <input type="submit" value="Submit" id="paymentFormSubmitButton">
             <input type="button" value="Back" id="paymentFormBackButton" class="black-btn">
