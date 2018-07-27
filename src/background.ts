@@ -40,16 +40,15 @@ chrome.runtime.onMessage.addListener(function(message: any,  sender: any, sendRe
             ApiHelper.issuePolicyRequest(message.paymentInfo, 
                 result.customer.CustomerInformation.CustomerReferenceNumber, result.travelerInfo).then((response, body: any) => {
                     let policyBatch = body.PolicyBatch;
-                    console.log(body);
-                    // for(let d of policyBatch.Documents) {
-                    //     chrome.downloads.download({
-                    //         url: d.DocumetURL
-                    //     });
-                    // }
+                    for(let d of policyBatch.Documents) {
+                        chrome.downloads.download({
+                            url: d.DocumentURL
+                        });
+                    }
                     for(let e of policyBatch.Policies) {
                         for(let p of e.Documents) {
                             chrome.downloads.download({
-                                url: p.DocumetURL
+                                url: p.DocumentURL
                             });
                         }
                     }
