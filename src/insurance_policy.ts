@@ -129,8 +129,6 @@ $('#paymentForm').submit((event) => {
         ExpiryYear: cYear,
         Cvc: cvc
     };
-
-    console.log(paymentInfo);
     chrome.runtime.sendMessage({
         'issuePolicy' : 'action',
         'paymentInfo' : paymentInfo

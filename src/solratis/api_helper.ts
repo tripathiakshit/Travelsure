@@ -126,7 +126,7 @@ export class ApiHelper {
         let reqProc: ccModels.Request = {
             ServiceRequestDetail : this.getStaticRequestInfo(),
             CustomerInformation : 
-            this.buildCCInfo(fromDate, toDate, country, plan, 
+            this.buildCCInfo(fromDate, toDate, country, plan, travelerInfo.StateCode,
                 this.getCCTravelerList(traveler.TravelCost, traveler.TravelerDOB, travelerInfo))
         }
         return this.getCCApi().createcustomer(this.getToken(), "application/json", "CreateCustomer", reqProc);
@@ -154,7 +154,6 @@ export class ApiHelper {
             ServiceRequestDetail : this.getIssueServiceRequest(),
             PolicyInformation : policyInfo
         }
-        console.log(reqProc);
         return this.getIssueApi().policyissuance(this.getToken(), "application/json", "Pay_Issue", reqProc);
     }
 
@@ -193,7 +192,7 @@ export class ApiHelper {
     }
 
     public static buildCCInfo(fromDate: string, toDate: string,
-        country: string, plan: any,
+        country: string, plan: any, stateCode: string,
         travelerList: Array<ccModels.RequestCustomerInformationTravelerList>) :
         ccModels.RequestCustomerInformation {
             
@@ -203,6 +202,7 @@ export class ApiHelper {
             custInfo.PlanCode = pInfo.PlanCode;
             custInfo.PlanType = "Single Trip";
             custInfo.DepartureDate = fromDate;
+            custInfo.StateCode = stateCode;
             custInfo.ReturnDate = toDate;
             custInfo.DepositDate = fromDate;
             custInfo.DestinationCountry = country;

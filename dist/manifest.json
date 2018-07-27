@@ -29,6 +29,7 @@
   "permissions": [
     "storage",
     "tabs",
+    "downloads",
     "<all_urls>"
   ]
 }

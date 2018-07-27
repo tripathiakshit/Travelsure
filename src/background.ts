@@ -27,7 +27,6 @@ chrome.runtime.onMessage.addListener(function(message: any,  sender: any, sendRe
         chrome.storage.local.get(['country', 'fromDate', 'toDate', 'price', message.plan], function(result) {
             ApiHelper.createCustomerRequest(result.fromDate, 
                 result.toDate, result.country, result[message.plan], message.travelInfo).then((resp, body) => {
-                    console.log(body);
                     chrome.storage.local.set({
                         'customer': body,
                         'travelerInfo' : message.travelInfo
@@ -38,10 +37,22 @@ chrome.runtime.onMessage.addListener(function(message: any,  sender: any, sendRe
         });
     } else if(message.issuePolicy) {
         chrome.storage.local.get(['travelerInfo', 'customer'], function(result) {
-            console.log(result.customer);
             ApiHelper.issuePolicyRequest(message.paymentInfo, 
-                result.customer.CustomerInformation.CustomerReferenceNumber, result.travelerInfo).then((response, body) => {
+                result.customer.CustomerInformation.CustomerReferenceNumber, result.travelerInfo).then((response, body: any) => {
+                    let policyBatch = body.PolicyBatch;
                     console.log(body);
+                    // for(let d of policyBatch.Documents) {
+                    //     chrome.downloads.download({
+                    //         url: d.DocumetURL
+                    //     });
+                    // }
+                    for(let e of policyBatch.Policies) {
+                        for(let p of e.Documents) {
+                            chrome.downloads.download({
+                                url: p.DocumetURL
+                            });
+                        }
+                    }
             })
         })
     }
