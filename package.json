@@ -16,13 +16,13 @@
   "dependencies": {
     "airport-codes": "^1.0.2",
     "credit-card-type": "^7.0.0",
-    "jquery": "~3.3.1",
+    "jquery": "^3.4.0",
     "moment": "~2.22.0",
     "usa-states": "^0.0.5"
   },
   "devDependencies": {
     "@types/chrome": "~0.0.63",
-    "@types/jquery": "~3.3.1",
+    "@types/jquery": "^3.4.0",
     "ts-loader": "~4.2.0",
     "typescript": "~2.8.1",
     "webpack": "~4.5.0",
