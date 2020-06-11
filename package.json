@@ -14,15 +14,22 @@
     "url": "https://github.com/tripathiakshit/Travelsure.git"
   },
   "dependencies": {
+    "acorn": "^7.2.0",
     "airport-codes": "^1.0.2",
     "credit-card-type": "^7.0.0",
+    "csv-parse": "^4.10.1",
     "jquery": "^3.4.0",
+    "kind-of": "^6.0.3",
+    "lodash": "^4.17.15",
+    "mem": "^6.1.0",
+    "minimist": "^1.2.5",
     "moment": "~2.22.0",
+    "serialize-javascript": "^4.0.0",
     "usa-states": "^0.0.5"
   },
   "devDependencies": {
     "@types/chrome": "~0.0.63",
-    "@types/jquery": "^3.4.0",
+    "@types/jquery": "^3.3.38",
     "ts-loader": "~4.2.0",
     "typescript": "~2.8.1",
     "webpack": "~4.5.0",
