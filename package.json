@@ -22,7 +22,7 @@
     "kind-of": "^6.0.3",
     "lodash": "^4.17.19",
     "mem": "^6.1.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "moment": "~2.22.0",
     "serialize-javascript": "^4.0.0",
     "usa-states": "^0.0.5"
